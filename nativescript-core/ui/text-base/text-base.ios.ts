@@ -140,7 +140,12 @@ export class TextBase extends TextBaseCommon {
             const paragraphStyle = NSMutableParagraphStyle.alloc().init();
             paragraphStyle.minimumLineHeight = this.lineHeight;
             // make sure a possible previously set text alignment setting is not lost when line height is specified
-            paragraphStyle.alignment = (<UITextField | UITextView | UILabel>this.nativeTextViewProtected).textAlignment;
+            if (this.nativeTextViewProtected instanceof UIButton) {
+                paragraphStyle.alignment = (<UIButton>this.nativeTextViewProtected).titleLabel.textAlignment;
+            } else {
+                paragraphStyle.alignment = (<UITextField | UITextView | UILabel>this.nativeTextViewProtected).textAlignment;
+            }
+
             if (this.nativeTextViewProtected instanceof UILabel) {
                 // make sure a possible previously set line break mode is not lost when line height is specified
                 paragraphStyle.lineBreakMode = this.nativeTextViewProtected.lineBreakMode;
@@ -193,7 +198,12 @@ export class TextBase extends TextBaseCommon {
             const paragraphStyle = NSMutableParagraphStyle.alloc().init();
             paragraphStyle.lineSpacing = style.lineHeight;
             // make sure a possible previously set text alignment setting is not lost when line height is specified
-            paragraphStyle.alignment = (<UITextField | UITextView | UILabel>this.nativeTextViewProtected).textAlignment;
+            if (this.nativeTextViewProtected instanceof UIButton) {
+                paragraphStyle.alignment = (<UIButton>this.nativeTextViewProtected).titleLabel.textAlignment;
+            } else {
+                paragraphStyle.alignment = (<UITextField | UITextView | UILabel>this.nativeTextViewProtected).textAlignment;
+            }
+
             if (this.nativeTextViewProtected instanceof UILabel) {
                 // make sure a possible previously set line break mode is not lost when line height is specified
                 paragraphStyle.lineBreakMode = this.nativeTextViewProtected.lineBreakMode;
